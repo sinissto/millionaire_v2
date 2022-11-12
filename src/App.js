@@ -24,10 +24,14 @@ function App() {
       <div className="main">main window</div>
       <div className="pyramid">
         <ul className="moneyList">
-          <li className="moneyListItem active">
-            <span className="moneyListItemNumber">4</span>
-            <span className="moneyListItemAmount">$ 400</span>
-          </li>
+          {moneyPyramid
+            .map((money) => (
+              <li className="moneyListItem">
+                <span className="moneyListItemNumber">{money.id}</span>
+                <span className="moneyListItemAmount">{money.amount}</span>
+              </li>
+            ))
+            .reverse()}
         </ul>
       </div>
     </div>
