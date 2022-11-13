@@ -3,73 +3,38 @@ import { useState } from "react";
 import Trivia from "./components/Trivia";
 
 function App() {
-  const [questionNumber, setQuestionNumber] = useState(8);
+  const [questionNumber, setQuestionNumber] = useState(1);
+  const [stopGame, setStopGame] = useState(false);
 
   const data = [
     {
       id: 1,
       question: "Rolex is a company that specializes in what type of product?",
       answers: [
-        {
-          text: "Phone",
-          correct: false,
-        },
-        {
-          text: "Watches",
-          correct: true,
-        },
-        {
-          text: "Food",
-          correct: false,
-        },
-        {
-          text: "Cosmetic",
-          correct: false,
-        },
+        { id: "A", text: "Phone", correct: false },
+        { id: "B", text: "Watches", correct: true },
+        { id: "C", text: "Food", correct: false },
+        { id: "D", text: "Cosmetic", correct: false },
       ],
     },
     {
       id: 2,
       question: "When did the website `Facebook` launch?",
       answers: [
-        {
-          text: "2004",
-          correct: true,
-        },
-        {
-          text: "2005",
-          correct: false,
-        },
-        {
-          text: "2006",
-          correct: false,
-        },
-        {
-          text: "2007",
-          correct: false,
-        },
+        { id: "A", text: "2004", correct: true },
+        { id: "B", text: "2005", correct: false },
+        { id: "C", text: "2006", correct: false },
+        { id: "D", text: "2007", correct: false },
       ],
     },
     {
       id: 3,
       question: "Who played the character of harry potter in movie?",
       answers: [
-        {
-          text: "Johnny Deep",
-          correct: false,
-        },
-        {
-          text: "Leonardo Di Caprio",
-          correct: false,
-        },
-        {
-          text: "Denzel Washington",
-          correct: false,
-        },
-        {
-          text: "Daniel Red Cliff",
-          correct: true,
-        },
+        { id: "A", text: "Johnny Deep", correct: false },
+        { id: "B", text: "Leonardo Di Caprio", correct: false },
+        { id: "C", text: "Denzel Washington", correct: false },
+        { id: "D", text: "Daniel Red Cliff", correct: true },
       ],
     },
   ];
@@ -99,7 +64,12 @@ function App() {
           <div className="timer">30</div>
         </div>
         <div className="bottom">
-          <Trivia />
+          <Trivia
+            data={data}
+            setStopGame={setStopGame}
+            questionNumber={questionNumber}
+            setQuestionNumber={setQuestionNumber}
+          />
         </div>
       </div>
 
@@ -108,6 +78,7 @@ function App() {
           {moneyPyramid
             .map((money) => (
               <li
+                key={money.id}
                 className={
                   questionNumber === money.id
                     ? "moneyListItem active"
